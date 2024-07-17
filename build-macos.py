@@ -1,6 +1,6 @@
 import os
 import shutil
-from distutils.core import setup
+from setuptools import setup
 
 
 def tree(src):

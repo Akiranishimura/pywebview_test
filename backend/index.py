@@ -2,20 +2,21 @@ import os
 import threading
 from time import time
 
+
 import webview
+import serial
 
 
 class Api:
     def fullscreen(self):
         webview.windows[0].toggle_fullscreen()
 
-    def save_content(self, content):
-        filename = webview.windows[0].create_file_dialog(webview.SAVE_DIALOG)
-        if not filename:
-            return
-
-        with open(filename, "w") as f:
-            f.write(content)
+    def manual(i):
+        ser = serial.Serial("/dev/tty.wchusbserial51850168071", 115200)
+        serialCommand = "manual,3"
+        ser.write(serialCommand.encode())
+        print(serialCommand)
+        ser.close()
 
     def ls(self):
         return os.listdir(".")
